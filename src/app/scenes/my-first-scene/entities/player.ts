@@ -31,11 +31,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
         if (cursorKeys.up.isDown) {
             this.setVelocityY(-300);
-            this.angle = -90;
+            this.resetFlip();
             this.play('move', true);
         } else if (cursorKeys.down.isDown) {
             this.setVelocityY(300);
-            this.angle = 90;
+            this.setFlipX(true);
             this.play('move', true);
         } else {
             this.setVelocityY(0);
@@ -44,11 +44,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         
         if (cursorKeys.right.isDown) {
             this.setVelocityX(300);
-            this.angle = 0;
+            this.resetFlip();
             this.play('move', true);
         } else if (cursorKeys.left.isDown) {
             this.setVelocityX(-300);
-            this.angle = 180;
+            this.setFlipX(true);
             this.play('move', true);
         } else {
             
@@ -60,7 +60,5 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocity(0);
             this.play('idle', true);
         }
-
-        console.log(this.x, this.y)
     }
 }
