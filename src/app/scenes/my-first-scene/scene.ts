@@ -37,6 +37,16 @@ export class GameScene extends Phaser.Scene {
 
     public create() {
 
+        this.createMap();
+        this.createEntities();
+        
+    }
+
+    public update(time: number, delta: number) {
+        this.animatedTiles.forEach(tile => tile.update(delta));
+    }
+
+    private createMap() {
         let map = this.make.tilemap({ data: this.world.getGrid(), tileWidth: 24, tileHeight: 24 });
         let tiles = map.addTilesetImage("game-tiles");
         let bottomLayer = map.createLayer(0, tiles, 0, 0);
@@ -50,7 +60,9 @@ export class GameScene extends Phaser.Scene {
                 t.rotation = rotationInDegree * (Math.PI / 180);
             } 
         ); 
+    }
 
+    private createEntities(){
         let player = new Player(this, 200,200);
         
         this.entities.push(player);
@@ -58,9 +70,5 @@ export class GameScene extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, this.world.getGrid().length, this.world.getGrid().length)
 
         this.physics.add.collider(this.entities, this.staticEntities);
-    }
-
-    public update(time: number, delta: number) {
-        this.animatedTiles.forEach(tile => tile.update(delta));
     }
 }
