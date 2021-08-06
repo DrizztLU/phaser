@@ -34,7 +34,6 @@ export class AppComponent implements AfterViewInit {
             },
             parent: 'game',
             backgroundColor: '#000000',
-    
             scene: GameScene,
         };
     }

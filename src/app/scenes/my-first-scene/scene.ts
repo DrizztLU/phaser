@@ -30,6 +30,7 @@ export class GameScene extends Phaser.Scene {
     public preload(){
         this.world = this.wb.GenerateWorld(WorldBuilderTypeEnum.Wilderness);
         this.load.image("game-tiles", "assets/tilesets/"+ this.world.tileset +".png");
+        this.load.audio("theme", "assets/music/theme.wav");
 
         this.load.spritesheet('player', 'assets/sprites/bnm.png', {frameWidth: 24, frameHeight: 24});
         this.load.spritesheet("tree", 'assets/sprites/tree.png', {frameWidth: 24, frameHeight: 24})
@@ -40,6 +41,7 @@ export class GameScene extends Phaser.Scene {
         this.createMap();
         this.createEntities();
         
+        this.sound.play("theme");
     }
 
     public update(time: number, delta: number) {
@@ -60,6 +62,7 @@ export class GameScene extends Phaser.Scene {
                 t.rotation = rotationInDegree * (Math.PI / 180);
             } 
         ); 
+
     }
 
     private createEntities(){
