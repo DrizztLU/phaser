@@ -42,6 +42,8 @@ export class GameScene extends Phaser.Scene {
         let bottomLayer = map.createLayer(0, tiles, 0, 0);
         bottomLayer.depth = -10;
 
+        this.physics.world.setBounds(0, 0, this.world.getGrid().length, this.world.getGrid().length)
+
         map.forEachTile((t) => {
                 let seed = Math.random();
                 let rotationInDegree = (Math.floor(seed * 100) % 4) * 90;
@@ -50,9 +52,10 @@ export class GameScene extends Phaser.Scene {
         ); 
 
         let player = new Player(this, 200,200);
-
+        
         this.entities.push(player);
         this.cameras.main.startFollow(player);
+        this.cameras.main.setBounds(0, 0, this.world.getGrid().length, this.world.getGrid().length)
 
         this.physics.add.collider(this.entities, this.staticEntities);
     }
