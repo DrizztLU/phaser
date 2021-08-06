@@ -78,7 +78,7 @@ export class GameScene extends Phaser.Scene {
         }
 
         let player = new Player(this, 200,200);
-        
+        player.setCollideWorldBounds(true);
         this.entities.push(player);
         this.cameras.main.startFollow(player);
         this.cameras.main.setBounds(0, 0, worldWidth, worldLength);
