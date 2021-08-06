@@ -63,12 +63,49 @@ export class GameScene extends Phaser.Scene {
     }
 
     private createEntities(){
+        let worldWidth = this.world.getGrid().length;
+        let worldLength = this.world.getGrid().length;
+        let treeCount = 100;
+
+        let treeGrid = [];
+
+        // Hardcoded sprite size
+        for (let x = 0; x < worldWidth / 24; x++) {
+            treeGrid[x] = new Array<number>();
+            for (let y = 0; y < worldLength / 24; y++) {
+                treeGrid[x][y] = 0;
+            }
+        }
+
         let player = new Player(this, 200,200);
         
         this.entities.push(player);
         this.cameras.main.startFollow(player);
-        this.cameras.main.setBounds(0, 0, this.world.getGrid().length, this.world.getGrid().length)
+        this.cameras.main.setBounds(0, 0, worldWidth, worldLength);
+
+        for (let index = 0; index < treeCount; index++) {
+
+            let position = this.generateRandomPositionInScene();
+
+            if(treeGrid[Math.floor(position.posX / 24)][Math.floor(position.posY / 24)] == 0){
+                let tree = new Tree(this, position.posX, position.posY)
+                this.staticEntities.push(tree);
+            }
+            else {
+                index--;
+            }
+        }
 
         this.physics.add.collider(this.entities, this.staticEntities);
+    }
+
+    private generateRandomPositionInScene(): {posX:number, posY:number}{
+        let worldWidth = this.world.getGrid().length;
+        let worldLength = this.world.getGrid().length;
+
+        let posX = Math.floor(Math.random() * worldWidth);
+        let posY = Math.floor(Math.random() * worldLength);
+
+        return { posX: posX, posY: posY};
     }
 }
