@@ -82,6 +82,7 @@ export class GameScene extends Phaser.Scene {
         this.entities.push(player);
         this.cameras.main.startFollow(player);
         this.cameras.main.setBounds(0, 0, worldWidth, worldLength);
+        this.cameras.main.zoom = 2;
 
         for (let index = 0; index < treeCount; index++) {
 
