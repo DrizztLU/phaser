@@ -30,7 +30,7 @@ export class GameScene extends Phaser.Scene {
     public preload(){
         this.world = this.wb.GenerateWorld(WorldBuilderTypeEnum.Wilderness);
         this.load.image("game-tiles", "assets/tilesets/"+ this.world.tileset +".png");
-        this.load.audio("theme", "assets/music/theme.wav");
+        this.load.audio("theme", "assets/music/theme.mp3");
 
         this.load.spritesheet('player', 'assets/sprites/bnm.png', {frameWidth: 24, frameHeight: 24});
         this.load.spritesheet("tree", 'assets/sprites/tree.png', {frameWidth: 24, frameHeight: 24})
