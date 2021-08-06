@@ -29,12 +29,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         let noXMovement: boolean = false;
         let noYMovement: boolean = false;
 
+        let xVelocity = 0;
+        let yVelocity = 0;
+
         if (cursorKeys.up.isDown) {
-            this.setVelocityY(-300);
+            yVelocity = -300;
             this.resetFlip();
             this.play('move', true);
         } else if (cursorKeys.down.isDown) {
-            this.setVelocityY(300);
+            yVelocity = 300;
             this.setFlipX(true);
             this.play('move', true);
         } else {
@@ -43,11 +46,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         }
         
         if (cursorKeys.right.isDown) {
-            this.setVelocityX(300);
+            xVelocity = 300;
             this.resetFlip();
             this.play('move', true);
         } else if (cursorKeys.left.isDown) {
-            this.setVelocityX(-300);
+            xVelocity = -300;
             this.setFlipX(true);
             this.play('move', true);
         } else {
@@ -59,6 +62,15 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         if(noXMovement && noYMovement){
             this.setVelocity(0);
             this.play('idle', true);
+        }
+        else if (!noXMovement && !noYMovement){
+            
+            this.setVelocityX(xVelocity * 0.60);
+            this.setVelocityY(yVelocity * 0.60);
+        }
+        else {
+            this.setVelocityX(xVelocity);
+            this.setVelocityY(yVelocity);
         }
     }
 }
